@@ -14,10 +14,10 @@ function setup(){
   game.getGameState();
   game.createForm();
 
-  car1 = createSprite(10,10,10,10);
-  car2 = createSprite(10,10,10,10);
-  car3 = createSprite(10,10,10,10);
-  car4 = createSprite(10,10,10,10);
+  car1 = createSprite(10,10,100,100);
+  car2 = createSprite(10,10,100,100);
+  car3 = createSprite(10,10,100,100);
+  car4 = createSprite(10,10,100,100);
 
   allCars = [car1,car2,car3,car4];
 }
@@ -31,7 +31,4 @@ function draw(){
     clear();
     game.play();
   }
-
-  
-
 }

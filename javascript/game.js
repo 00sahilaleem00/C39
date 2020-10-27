@@ -7,7 +7,7 @@ class Game {
         var ref = database.ref('gameState');
         ref.on('value', function(data){
             gameState = data.val();
-        } );
+        });
     }
 
     setGameState(state){
@@ -30,37 +30,38 @@ class Game {
         form.hide();
         textSize(30);
         text("GAME START", 120, 100);
+
         Player.getInformation();
 
         if(allPlayerInformation != undefined){
-            //var display_position = 130;
+
             var carIndex = 0;
             var xposition = displayWidth/8;
             var yposition;
 
             for(var plr in allPlayerInformation){
-                /*if(plr == "player" + player.index){
-                    fill("red");
+                if(player.index === (carIndex+1)){
+                    allCars[carIndex].shapeColor = "red";
+                    camera.position.x = displayWidth/2;
+                    camera.position.y = allCars[carIndex].y;
+
                 }
-                else{
-                    fill("black");
-                }
-                display_position += 20;
-                textSize(15);
-                text(allPlayerInformation[plr].name + ": " + allPlayerInformation[plr].distance, 120, display_position);*/
 
                 allCars[carIndex].x = xposition;
                 xposition += displayWidth/4;
                 yposition = displayHeight - allPlayerInformation[plr].distance;
-                allCars[carIndex].x = yposition;
+                allCars[carIndex].y = yposition;
+                carIndex += 1;
 
             }
         }
-
+        
         if(keyIsDown(UP_ARROW) && player.index != null){
             player.distance += 50;
             player.update();
         }
+
+        drawSprites();
     }
 
 }
