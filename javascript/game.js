@@ -30,6 +30,10 @@ class Game {
         form.hide();
         textSize(30);
         text("GAME START", 120, 100);
+        push();
+        imageMode(CENTER);
+        image(trackimg,displayWidth/2,(displayHeight-(7848/2)),displayWidth,7848);
+        pop();
 
         Player.getInformation();
 
@@ -40,19 +44,24 @@ class Game {
             var yposition;
 
             for(var plr in allPlayerInformation){
-                if(player.index === (carIndex+1)){
-                    allCars[carIndex].shapeColor = "red";
-                    camera.position.x = displayWidth/2;
-                    camera.position.y = allCars[carIndex].y;
-
-                }
+                
 
                 allCars[carIndex].x = xposition;
                 xposition += displayWidth/4;
                 yposition = displayHeight - allPlayerInformation[plr].distance;
                 allCars[carIndex].y = yposition;
-                carIndex += 1;
 
+                if(player.index === (carIndex+1)){
+                    rectMode(CENTER);
+                    rect(allCars[carIndex].x,allCars[carIndex].y,80,160);
+                    camera.position.x = displayWidth/2;
+                    camera.position.y = allCars[carIndex].y;
+                }
+
+                if(allCars[carIndex].y<-6700){
+                    gameState = 2;
+                }
+                carIndex += 1;
             }
         }
         
@@ -60,8 +69,12 @@ class Game {
             player.distance += 50;
             player.update();
         }
-
+        
         drawSprites();
+    }
+
+    end(){
+        console.log(gameState);
     }
 
 }
